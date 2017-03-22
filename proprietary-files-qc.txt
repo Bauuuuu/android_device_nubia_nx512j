@@ -31,7 +31,6 @@ vendor/lib/libhwdaphal.so
 vendor/lib/libvoice-svc.so
 
 # Bluetooth
-bin/btnvtool
 bin/hci_qcomm_init
 vendor/lib64/libbtnv.so
 
