@@ -3,6 +3,7 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     camera.device@3.2-impl \
     libmm-qcamera \
+    libshims_camera \
     Snap
 
 # Permissions
