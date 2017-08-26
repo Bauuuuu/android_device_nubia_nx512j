@@ -34,5 +34,4 @@ endif
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     librmnetctl \
-    libxml2 \
-    sockev
+    libxml2
