@@ -21,3 +21,7 @@ include device/nubia/nx512j/board/*.mk
 
 # Inherit from proprietary files
 -include vendor/nubia/nx512j/BoardConfigVendor.mk
+
+#FileSystem
+TARGET_FS_CONFIG_GEN := $(VENDOR_PATH)/config.fs
+
