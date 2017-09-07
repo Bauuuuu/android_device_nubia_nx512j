@@ -3,7 +3,9 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     libjni_proximityCalibrate \
     ProximityCalibrate \
-    sensors.msm8916
+    sensors.msm8916 \
+    libcalmodule_common \
+    calmodule.cfg
 
 # Permissions
 PRODUCT_COPY_FILES += \
