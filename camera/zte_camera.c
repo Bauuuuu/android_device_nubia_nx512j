@@ -60,3 +60,4 @@ void _ZN7android13SensorManagerC1Ev(void *sensorMgr)
     /* for nubia camera stock app */
 extern void _ZN8SkBitmap9setConfigENS_6ConfigEiij11SkAlphaType() {}
 extern void _ZN8SkBitmap9setConfigENS_6ConfigEiim11SkAlphaType() {}
+extern void _ZN14SkImageDecoder10DecodeFileEPKcP8SkBitmap11SkColorTypeNS_4ModeEPNS_6FormatE() {}
