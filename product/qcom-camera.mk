@@ -1,6 +1,6 @@
 # Camera
 PRODUCT_PACKAGES += \
-    libmm-qcamera \
+    android.hardware.camera.provider@2.4-impl.legacy \
     Snap
 
 # Permissions
