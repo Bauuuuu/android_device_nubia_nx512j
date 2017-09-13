@@ -15,3 +15,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES  += \
     ro.usb.id.ums=F000 \
     ro.usb.id.ums_adb=9015 \
     ro.usb.vid=05c6
+
+# USB HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
