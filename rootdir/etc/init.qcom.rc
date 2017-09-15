@@ -42,8 +42,7 @@ on early-init
     write /sys/class/leds/lcd-backlight/trigger "backlight"
 
 on init
-
-    export LD_SHIM_LIBS "/system/vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so:/system/vendor/lib/libmmcamera2_imglib_modules.so|libzte_camera.so:/system/lib/hw/camera.msm8916.so|libzte_camera.so:/system/vendor/lib64/libizat_core.so|libshim_gps.so:/system/vendor/lib64/libflp.so|libshims_flp.so"
+    export LD_SHIM_LIBS "/system/vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so:/system/vendor/lib/libmmcamera2_imglib_modules.so|libzte_camera.so:/system/lib/hw/camera.msm8916.so|libzte_camera.so:/system/vendor/lib64/libizat_core.so|libshim_gps.so:/system/vendor/lib64/libflp.so|libshims_flp.so:/system/vendor/lib/libqomx_jpegenc.so|libzte_camera.so"
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
