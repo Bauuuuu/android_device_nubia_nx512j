@@ -111,8 +111,10 @@ vendor/lib/libmmqjpeg_codec.so
 vendor/lib/liboemcamera.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc.so
+vendor/lib/libstlport.so
 vendor/lib64/libmmcamera2_frame_algorithm.so
 vendor/lib64/libmmcamera2_stats_algorithm.so
+
 
 # Camera actuator
 vendor/lib/libactuator_rohm_bu64297gwz_camcorder.so
@@ -390,10 +392,16 @@ vendor/lib/libxml.so
 vendor/lib64/libxml.so
 vendor/lib/libmdmdetect.so
 
-#Sensors
-bin/akmd09911
-lib/hw/sensors.msm8916.so
-lib64/hw/sensors.msm8916.so
+# added to fix RIL for missing libsettings symbols
+vendor/lib/libprotobuf-cpp-biss.so
+vendor/lib/libprotobuf-cpp-shit.so
+vendor/lib64/libcneapiclient.so
+vendor/lib64/libprotobuf-cpp-biss.so
+vendor/lib64/libprotobuf-cpp-shit.so
+
+#Sensor calibration
+vendor/lib/libcalmodule_gyroscope.so
+vendor/lib64/libcalmodule_gyroscope.so
 
 # Thermal
 vendor/bin/thermal-engine
