@@ -36,54 +36,23 @@ bin/hci_qcomm_init
 vendor/lib64/libbtnv.so
 
 # Camera
-bin/mm-qcamera-app
 bin/mm-qcamera-daemon
-lib/libmm-qcamera.so
-lib/libmmcamera_interface.so
-lib/libnubia_runtime.so
-lib/libnubia_servers.so
-lib/libnubia_trajectory.so
-lib/libobjectclear_nubia.so
-lib/libmmjpeg_interface.so
-lib/libmorpho_image_converter.so
-lib/libmorpho_jpeg_io.so
-lib/libmorpho_memory_allocator.so
-lib/libmorpho_strobe_photo_jni.so
-lib/libobjectclear.so
-lib/libqomx_core.so
 lib/hw/camera.msm8916.so
-lib64/libAlgorithm.so
-lib64/libalRnB.so
-lib64/libalSDE2.so
-lib64/libavcodec.so
-lib64/libavfilter.so
-lib64/libavformat.so
-lib64/libavutil.so
-lib64/libbuffer_manager.so
-lib64/libBuffer.so
-lib64/libmorpho_image_converter.so
-lib64/libmorpho_jpeg_io.so
-lib64/libmorpho_memory_allocator.so
-lib64/libmorpho_panorama_gp.so
-lib64/libmulti_exposure.so
-lib64/libnubia_clone.so
-lib64/libnubia_delay_recorder.so
-lib64/libnubia_runtime.so
-lib64/libnubia_servers.so
-lib64/libnubia_trajectory.so
-lib64/libNubiaImageAlgorithm.so
+lib/libmmcamera_interface.so
+lib/libmmcamera_nubiacustpro.so
+lib/libmmjpeg_interface.so
+lib/libnubia_effect.so
+lib/libqomx_core.so
+lib/libImageAlogrithm.so
+lib/libnubiajpeg.so
+lib/libnubiajpeg_temp.so
+lib/libFNVfbEngineHAL.so
 lib64/libnubiajpeg.so
-lib64/libNubiaxmptoolkit.so
-lib64/libobjectclear_nubia.so
-lib64/libobjectclear.so
-lib64/libpanoramahelper.so
 lib64/libFNVfbEngineLib.so
-lib64/libproductinfo.so
-lib64/libIndependenceUtil.so
+lib64/libImageAlogrithm.so
+lib64/libnubiajpeg_temp.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
-vendor/lib/libmmcamera_hi256.so
-vendor/lib/libmmcamera_imglib.so
 vendor/lib/libmmcamera2_c2d_module.so
 vendor/lib/libmmcamera2_cpp_module.so
 vendor/lib/libmmcamera2_frame_algorithm.so
@@ -109,10 +78,8 @@ vendor/lib/libmmipl.so
 vendor/lib/libmmjpeg.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/liboemcamera.so
-vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc.so
-vendor/lib64/libmmcamera2_frame_algorithm.so
-vendor/lib64/libmmcamera2_stats_algorithm.so
+vendor/lib/libstlport.so
 
 # Camera actuator
 vendor/lib/libactuator_rohm_bu64297gwz_camcorder.so
@@ -390,10 +357,16 @@ vendor/lib/libxml.so
 vendor/lib64/libxml.so
 vendor/lib/libmdmdetect.so
 
-#Sensors
-bin/akmd09911
-lib/hw/sensors.msm8916.so
-lib64/hw/sensors.msm8916.so
+# added to fix RIL for missing libsettings symbols
+vendor/lib/libprotobuf-cpp-biss.so
+vendor/lib/libprotobuf-cpp-shit.so
+vendor/lib64/libcneapiclient.so
+vendor/lib64/libprotobuf-cpp-biss.so
+vendor/lib64/libprotobuf-cpp-shit.so
+
+#Sensor calibration
+vendor/lib/libcalmodule_gyroscope.so
+vendor/lib64/libcalmodule_gyroscope.so
 
 # Thermal
 vendor/bin/thermal-engine
