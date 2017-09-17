@@ -61,3 +61,6 @@ void _ZN7android13SensorManagerC1Ev(void *sensorMgr)
 extern void _ZN8SkBitmap9setConfigENS_6ConfigEiij11SkAlphaType() {}
 extern void _ZN8SkBitmap9setConfigENS_6ConfigEiim11SkAlphaType() {}
 extern void _ZN14SkImageDecoder10DecodeFileEPKcP8SkBitmap11SkColorTypeNS_4ModeEPNS_6FormatE() {}
+extern void _ZN7android13GraphicBufferC1Ejjij() {}
+extern void _ZN14SkImageDecoder12DecodeMemoryEPKvjP8SkBitmap11SkColorTypeNS_4ModeEPNS_6FormatE() {}
+extern void _ZN14SkImageEncoder12EncodeStreamEP9SkWStreamRK8SkBitmapNS_4TypeEi() {}
