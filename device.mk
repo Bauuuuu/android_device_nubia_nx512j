@@ -21,4 +21,4 @@ DEVICE_PACKAGE_OVERLAYS += \
 
 include $(LOCAL_PATH)/product/*.mk
 
-$(call inherit-product, vendor/nubia/nx512j/nx512j-vendor.mk)
+$(call inherit-product, vendor/nubia/nx513j/nx513j-vendor.mk)

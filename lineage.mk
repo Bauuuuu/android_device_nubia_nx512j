@@ -13,14 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, device/nubia/nx512j/full_nx512j.mk)
+$(call inherit-product, device/nubia/nx513j/full_nx513j.mk)
 
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_nx512j
+PRODUCT_NAME := lineage_nx513j
 BOARD_VENDOR := nubia
-PRODUCT_DEVICE := nx512j
+PRODUCT_DEVICE := nx513j
 
 PRODUCT_GMS_CLIENTID_BASE := android-nubia
 

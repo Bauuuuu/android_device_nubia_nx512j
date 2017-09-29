@@ -18,12 +18,12 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from nx512j device
-$(call inherit-product, device/nubia/nx512j/device.mk)
+# Inherit from nx513j device
+$(call inherit-product, device/nubia/nx513j/device.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := nx512j
-PRODUCT_NAME := full_nx512j
+PRODUCT_DEVICE := nx513j
+PRODUCT_NAME := full_nx513j
 PRODUCT_BRAND := NUBIA
 PRODUCT_MODEL := Z9MAX
 PRODUCT_MANUFACTURER := NUBIA
