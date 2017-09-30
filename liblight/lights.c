@@ -64,16 +64,16 @@ const char *const LCD_FILE
         = "/sys/class/leds/lcd-backlight/brightness";
 
 char const *const LED_MODE
-        = "/sys/class/leds/nubia_led/blink_mode";
+        = "/sys/class/leds/red/brightness";
 
 char const *const LED_OUTN
-        = "/sys/class/leds/nubia_led/outn";
+        = "/sys/class/leds/red/outn";
 
 char const *const LED_FADE
-        = "/sys/class/leds/nubia_led/fade_parameter";
+        = "/sys/class/leds/red/fade_parameter";
 
 char const *const LED_GRADE
-        = "/sys/class/leds/nubia_led/grade_parameter";
+        = "/sys/class/leds/red/grade_parameter";
 
 char const *const BATTERY_CAPACITY
         = "/sys/class/power_supply/battery/capacity";
