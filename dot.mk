@@ -15,12 +15,17 @@
 
 $(call inherit-product, device/nubia/nx512j/full_nx512j.mk)
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+# Inherit some common dotOS stuff.
+$(call inherit-product, vendor/dot/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_nx512j
+# Set those variables here to overwrite the inherited values.
 BOARD_VENDOR := nubia
+PRODUCT_BRAND := nubia
 PRODUCT_DEVICE := nx512j
+PRODUCT_NAME := dot_nx512j
+PRODUCT_MANUFACTURER := nubia
+PRODUCT_MODEL := Z9 Max
+TARGET_VENDOR := nubia
 
 PRODUCT_GMS_CLIENTID_BASE := android-nubia
 
