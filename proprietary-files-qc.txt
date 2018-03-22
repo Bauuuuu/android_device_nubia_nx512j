@@ -37,20 +37,15 @@ vendor/lib64/libbtnv.so
 # Camera
 bin/mm-qcamera-app
 bin/mm-qcamera-daemon
-lib/libmm-qcamera.so
-lib/libmmcamera_interface.so
 lib/libnubia_runtime.so
 lib/libnubia_servers.so
 lib/libnubia_trajectory.so
 lib/libobjectclear_nubia.so
-lib/libmmjpeg_interface.so
 lib/libmorpho_image_converter.so
 lib/libmorpho_jpeg_io.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_strobe_photo_jni.so
 lib/libobjectclear.so
-lib/libqomx_core.so
-lib/hw/camera.msm8916.so
 lib64/libAlgorithm.so
 lib64/libalRnB.so
 lib64/libalSDE2.so
@@ -97,7 +92,7 @@ vendor/lib/libmmcamera2_stats_algorithm.so
 vendor/lib/libmmcamera2_stats_modules.so
 vendor/lib/libmmcamera2_vpe_module.so
 vendor/lib/libmmcamera2_wnr_module.so
-vendor/lib/libmmcamera_faceproc.so
+vendor/lib/libmmcamera_faceproc.so|ac49bcc1aa20ff9f2c118f6c233b658f93543202
 vendor/lib/libmmcamera_hdr_gb_lib.so
 vendor/lib/libmmcamera_hdr_lib.so
 vendor/lib/libmmcamera_imglib.so
@@ -384,12 +379,11 @@ vendor/lib64/libril-qc-ltedirectdisc.so
 vendor/lib64/libril-qc-qmi-1.so
 vendor/lib64/libril-qc-radioconfig.so
 vendor/lib64/libril-qcril-hook-oem.so
-vendor/lib64/libsettings.so
+vendor/lib64/libsettings.so|4609cacca0a56dae2596687c8f5f2f9423d4d0d9
 vendor/lib64/libsystem_health_mon.so
 vendor/lib64/libxml.so
 vendor/lib/libxml.so
 vendor/lib/libmdmdetect.so
-vendor/lib/libcneapiclient.so
 
 #Gyro calibration blobs from stock CN-Common V9.29
 vendor/lib/libcalmodule_gyroscope.so|6c3af5d3657d3072e78eb01127a3a150f1987123
