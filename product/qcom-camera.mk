@@ -1,5 +1,6 @@
 # Camera
 PRODUCT_PACKAGES += \
+    camera.msm8916 \
     android.hardware.camera.provider@2.4-impl-legacy \
     camera.device@3.2-impl \
     Snap
