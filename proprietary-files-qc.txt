@@ -33,6 +33,8 @@ vendor/lib/libvoice-svc.so
 # Bluetooth
 bin/hci_qcomm_init
 vendor/lib64/libbtnv.so
+lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
+lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
 
 # Camera
 bin/mm-qcamera-app
