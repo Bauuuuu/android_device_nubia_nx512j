@@ -33,9 +33,7 @@ endif
 # RIL
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
-    librmnetctl \
-    libxml2 \
-    sockev
+    libxml2
 
 # Netmgrd
 PRODUCT_PACKAGES += \
