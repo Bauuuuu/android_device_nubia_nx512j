@@ -21,3 +21,6 @@ include device/nubia/nx512j/board/*.mk
 
 # Inherit from proprietary files
 -include vendor/nubia/nx512j/BoardConfigVendor.mk
+
+# Assertions
+TARGET_BOARD_INFO_FILE := device/nubia/nx512j/board-info.txt

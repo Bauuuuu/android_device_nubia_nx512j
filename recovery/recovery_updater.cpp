@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015, The CyanogenMod Project
+ * Copyright (C) 2018, The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,9 +32,21 @@
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
 #define ALPHABET_LEN 256
-#define KB 1024
 
-#define TZ_PART_PATH "/dev/block/platform/7824900.sdhci/by-name/tz"
+#ifdef USES_BOOTDEVICE_PATH
+#define BASEBAND_PART_PATH "/dev/block/bootdevice/by-name/modem"
+#else
+#define BASEBAND_PART_PATH "/dev/block/platform/soc.0/7824900.sdhci/by-name/modem"
+#endif
+#define BASEBAND_VER_STR_START "QC_IMAGE_VERSION_STRING=MPSS.DPM."
+#define BASEBAND_VER_STR_START_LEN 33
+#define BASEBAND_VER_BUF_LEN 255
+
+#ifdef USES_BOOTDEVICE_PATH
+#define TZ_PART_PATH "/dev/block/bootdevice/by-name/tz"
+#else
+#define TZ_PART_PATH "/dev/block/platform/soc.0/7824900.sdhci/by-name/tz"
+#endif
 #define TZ_VER_STR "QC_IMAGE_VERSION_STRING="
 #define TZ_VER_STR_LEN 24
 #define TZ_VER_BUF_LEN 255
@@ -117,9 +130,50 @@ static char * bm_search(const char *str, size_t str_len, const char *pat,
     return NULL;
 }
 
+static int get_baseband_version(char *ver_str, size_t len) {
+    int ret = 0;
+    int fd;
+    int baseband_size;
+    char *baseband_data = NULL;
+    char *offset = NULL;
+
+    fd = open(BASEBAND_PART_PATH, O_RDONLY);
+    if (fd < 0) {
+        ret = errno;
+        goto err_ret;
+    }
+
+    baseband_size = lseek64(fd, 0, SEEK_END);
+    if (baseband_size == -1) {
+        ret = errno;
+        goto err_fd_close;
+    }
+
+    baseband_data = (char *) mmap(NULL, baseband_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    if (baseband_data == (char *)-1) {
+        ret = errno;
+        goto err_fd_close;
+    }
+
+    /* Do Boyer-Moore search across BASEBAND data */
+    offset = bm_search(baseband_data, baseband_size, BASEBAND_VER_STR_START, BASEBAND_VER_STR_START_LEN);
+    if (offset != NULL) {
+        strncpy(ver_str, offset + BASEBAND_VER_STR_START_LEN, len);
+    } else {
+        ret = -ENOENT;
+    }
+
+    munmap(baseband_data, baseband_size);
+err_fd_close:
+    close(fd);
+err_ret:
+    return ret;
+}
+
 static int get_tz_version(char *ver_str, size_t len) {
     int ret = 0;
     int fd;
+    int tz_size;
     char *tz_data = NULL;
     char *offset = NULL;
 
@@ -129,56 +183,110 @@ static int get_tz_version(char *ver_str, size_t len) {
         goto err_ret;
     }
 
-    tz_data = (char *) mmap(NULL, TZ_SZ, PROT_READ, MAP_PRIVATE, fd, 0);
+    tz_size = lseek64(fd, 0, SEEK_END);
+    if (tz_size == -1) {
+        ret = errno;
+        goto err_fd_close;
+    }
+
+    tz_data = (char *) mmap(NULL, tz_size, PROT_READ, MAP_PRIVATE, fd, 0);
     if (tz_data == (char *)-1) {
         ret = errno;
         goto err_fd_close;
     }
 
     /* Do Boyer-Moore search across TZ data */
-    offset = bm_search(tz_data, TZ_SZ, TZ_VER_STR, TZ_VER_STR_LEN);
+    offset = bm_search(tz_data, tz_size, TZ_VER_STR, TZ_VER_STR_LEN);
     if (offset != NULL) {
         strncpy(ver_str, offset + TZ_VER_STR_LEN, len);
     } else {
         ret = -ENOENT;
     }
 
-    munmap(tz_data, TZ_SZ);
+    munmap(tz_data, tz_size);
 err_fd_close:
     close(fd);
 err_ret:
     return ret;
 }
 
+/* verify_baseband("BASEBAND_VERSION", "BASEBAND_VERSION", ...) */
+Value * VerifyBasebandFn(const char *name, State *state, int argc, Expr *argv[]) {
+    char current_baseband_version[BASEBAND_VER_BUF_LEN];
+    int i, ret;
+
+    ret = get_baseband_version(current_baseband_version, BASEBAND_VER_BUF_LEN);
+    if (ret) {
+        return ErrorAbort(state, kFreadFailure, "%s() failed to read current baseband version: %d",
+                name, ret);
+    }
+
+    char** baseband_version = ReadVarArgs(state, argc, argv);
+    if (baseband_version == NULL) {
+        return ErrorAbort(state, kArgsParsingFailure, "%s() error parsing arguments", name);
+    }
+
+    ret = 0;
+    for (i = 0; i < argc; i++) {
+        uiPrintf(state, "Comparing baseband version %s to %s",
+                 baseband_version[i], current_baseband_version);
+        if (strncmp(baseband_version[i], current_baseband_version, strlen(baseband_version[i])) == 0) {
+            ret = 1;
+            break;
+        }
+    }
+
+    if (ret == 0) {
+        uiPrintf(state, "ERROR: It appears you are running an unsupported baseband.");
+    }
+
+    for (i = 0; i < argc; i++) {
+        free(baseband_version[i]);
+    }
+    free(baseband_version);
+
+    return StringValue(strdup(ret ? "1" : "0"));
+}
+
 /* verify_trustzone("TZ_VERSION", "TZ_VERSION", ...) */
 Value * VerifyTrustZoneFn(const char *name, State *state, int argc, Expr *argv[]) {
     char current_tz_version[TZ_VER_BUF_LEN];
-    char *tz_version;
     int i, ret;
 
     ret = get_tz_version(current_tz_version, TZ_VER_BUF_LEN);
     if (ret) {
-        return ErrorAbort(state, "%s() failed to read current TZ version: %d",
+        return ErrorAbort(state, kFreadFailure, "%s() failed to read current TZ version: %d",
                 name, ret);
     }
 
-    for (i = 1; i <= argc; i++) {
-        ret = ReadArgs(state, argv, i, &tz_version);
-        if (ret < 0) {
-            return ErrorAbort(state, "%s() error parsing arguments: %d",
-                name, ret);
-        }
+    char** tz_version = ReadVarArgs(state, argc, argv);
+    if (tz_version == NULL) {
+        return ErrorAbort(state, kArgsParsingFailure, "%s() error parsing arguments", name);
+    }
 
+    ret = 0;
+    for (i = 0; i < argc; i++) {
         uiPrintf(state, "Comparing TZ version %s to %s",
-                tz_version, current_tz_version);
-        if (strncmp(tz_version, current_tz_version, strlen(tz_version)) == 0) {
-            return StringValue(strdup("1"));
+                tz_version[i], current_tz_version);
+        if (strncmp(tz_version[i], current_tz_version, strlen(tz_version[i])) == 0) {
+            ret = 1;
+            break;
         }
     }
 
-    return StringValue(strdup("0"));
+    if (ret == 0) {
+        uiPrintf(state, "ERROR: It appears you are running an unsupported TZ.");
+    }
+
+    for (i = 0; i < argc; i++) {
+        free(tz_version[i]);
+    }
+    free(tz_version);
+
+    return StringValue(strdup(ret ? "1" : "0"));
 }
 
 void Register_librecovery_updater_cm() {
+    RegisterFunction("cm.verify_baseband", VerifyBasebandFn);
     RegisterFunction("cm.verify_trustzone", VerifyTrustZoneFn);
 }
