@@ -269,11 +269,11 @@ float ProximitySensor::indexToValue(size_t index) const
    /* stock range near=3.0 cm & far =10.0cm
       convert to the specified range*/
       if (index < 300) {
-        index = 300;
-    } else if (index > 1000) {
-        index = 1000;
+        index = 10;
+    } else if (index > 300) {
+        index = 3;
     }
-    return 3000 / index * res; 
+    return index;
 }
 
 int ProximitySensor::calibrate(int32_t, struct cal_cmd_t *para,
