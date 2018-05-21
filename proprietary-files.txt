@@ -31,9 +31,9 @@ vendor/lib/libhwdaphal.so
 vendor/lib/libvoice-svc.so
 
 # Bluetooth
-bin/btnvtool:vendor/bin/btnvtool
-bin/hci_qcomm_init:vendor/bin/hci_qcomm_init
-vendor/lib64/libbtnv.so
+bin/btnvtool:vendor/bin/btnvtool|9648aaab07413ad9ce07e1845d84288ac6344927
+bin/hci_qcomm_init:vendor/bin/hci_qcomm_init|3d03d5cc491b20cac27a26a66e9c1744a83cdb30
+vendor/lib64/libbtnv.so|03ac64a0a79d535b82e3a09394be8e8bd8dabc02
 
 # Camera
 bin/mm-qcamera-app:vendor/bin/mm-qcamera-app
