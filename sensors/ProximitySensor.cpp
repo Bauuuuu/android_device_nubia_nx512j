@@ -37,6 +37,9 @@
 
 /*****************************************************************************/
 
+static int gTresh1 = 2000; //initialization of auxiliary variables for the function 'indexToValue'
+static bool gNear = false;
+
 enum input_device_name {
     GENERIC_PSENSOR = 0,
     LEGACY_PSENSOR,
@@ -266,12 +269,25 @@ int ProximitySensor::readEvents(sensors_event_t* data, int count)
 
 float ProximitySensor::indexToValue(size_t index) const
 {
-   // stock values NEAR=3.0 cm & FAR =10.0cm
-      if (index < 300) {
-        index = 10;
-    } else if (index > 300) {
+      if (index > 900) {  //when the sensor is covered, the index resets the value to 900-1023 after turning the screen on / off
+        gTresh1 = index;
+        gNear = true;
         index = 3;
-    }
+    } else if (index < (gTresh1 - 70)) {  //convert FAR with an error of 70
+        gTresh1 = index;
+        gNear = false;
+        index = 10;
+    } else if (index >= (gTresh1 + 70)) {  //convert NEAR with an error of 70
+        gTresh1 = index;
+        gNear = true;
+        index = 3;
+    } else if (gNear == true) {  //Add additional checks for other cases
+        gTresh1 = index;
+        index = 3;
+    } else if (gNear == false) {
+        gTresh1 = index;
+        index = 10;
+    } 
     return index * res;
 }
 
