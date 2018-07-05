@@ -1,0 +1,1 @@
+add_lunch_combo arrow_nx512j-userdebug
